@@ -27,6 +27,31 @@ const options = {
                         type: "string"
                     }
                 }
+            },
+            LoginUser: {
+                type: "object",
+                properties: {
+                    result: {
+                        type: "boolean"
+                    },
+                    accessToken: {
+                        type: "string"
+                    },
+                    refreshToken: {
+                        type: "string"
+                    },
+                    userInfo: {
+                        type: "object",
+                        properties: {
+                            userName: {
+                                type: "string"
+                            },
+                            userId: {
+                                type: "string"
+                            }
+                        }
+                    },
+                }
             }
         }
     },
