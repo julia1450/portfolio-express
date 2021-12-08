@@ -1,10 +1,9 @@
 const fs = require("fs");
 const path = require("path");
+const jwt = require("./jwt");
 
 var express = require("express");
 var router = express.Router();
-
-const { BASE_URL } = process.env;
 
 router.get("/", (req, res) => res.send("Hello World"));
 
@@ -57,6 +56,7 @@ router.get("/img/:fileName", (req, res) => {
  * paths:
  *   /login:
  *    post:
+ *      tags: [로그인]
  *      produces:
  *        - application/json
  *      parameters:
@@ -85,16 +85,19 @@ router.get("/img/:fileName", (req, res) => {
  *        409:
  *          description: Not have that kind of user
  */
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   console.log(req.body);
   const { id, password } = req.body;
   if (id && password) {
-    res.send({
+    // id, password 있는지 DB에서 체크
+    // const user = await User.getUserByEmail(email);
+
+    // 토큰 발급
+    const jwtToken = await jwt.sign({ id });
+    res.status(200).send({
       result: true,
-      accessToken:
-        "dfkdfjskjfqfeljfalkjfeklfjafeffeafeafaefaefefefafdsghgjklklesddf",
-      refreshToken:
-        "dfdfdfdferererertytytytyioioioiojkjkjkjkbnbnbnbnqwqwqwqwxzxzxzx",
+      accessToken: jwtToken.token,
+      refreshToken: jwtToken.refreshToken,
       userInfo: {
         userName: "Yun HyeWon",
         userId: id,
