@@ -1,10 +1,11 @@
 {
+  "type": "module",
   "name": "portfolio-express",
   "version": "1.0.0",
   "description": "portfolio 블로그와 연동하기 위한 express 서버",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon --exec ./node_modules/.bin/babel-node ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,15 +19,26 @@
   },
   "homepage": "https://github.com/julia1450/portfolio-express#readme",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "core-util-is": "^1.0.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.14",
-    "nodemon": "^2.0.15",
     "path": "^0.12.7",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.16.4",
+    "@types/jsonwebtoken": "^8.5.6",
+    "babel-loader": "^8.2.3",
+    "nodemon": "^2.0.15"
   }
 }

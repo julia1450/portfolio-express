@@ -1,13 +1,18 @@
-require("dotenv").config();
-global.TextEncoder = require("util").TextEncoder;
-global.TextDecoder = require("util").TextDecoder;
+import dotenv from "dotenv";
+dotenv.config();
+import util from "util"
+global.TextEncoder = util.TextEncoder;
+global.TextDecoder = util.TextDecoder;
 
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
 
-const mongoose = require("mongoose");
-const { swaggerUi, specs } = require("./swagger");
-const { checkToken } = require("./modules/auth");
+import mongoose from "mongoose";
+import swagger from "./swagger.js";
+import auth from "./modules/auth.js";
+
+const {swaggerUi, specs} = swagger;
+const checkToken = auth.checkToken;
 
 const app = express();
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
@@ -21,19 +26,20 @@ mongoose.connect(MONGO_URI, {
 });
 mongoose.Promise = global.Promise;
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+import bodyParser from "body-parser";
+const { urlencoded, json } = bodyParser;
+app.use(urlencoded({ extended: true }));
+app.use(json());
 
 app.use(cors());
 app.listen(PORT, () => console.log(`Example app listenling on port ${PORT}`));
 
 // 공통 API를 등록한다
-const common = require("./modules/common");
+import common from "./modules/common.js";
 app.use("/", common);
 
 // 작업물 관련 API를 등록한다
-const works = require("./modules/works");
+import works from "./modules/works.js";
 app.use("/work", works);
 
 // ADMIN API를 등록한다

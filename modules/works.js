@@ -1,4 +1,4 @@
-var express = require('express');
+import express from "express"
 var router = express.Router();
 
 const { BASE_URL } = process.env;
@@ -221,5 +221,5 @@ router.get("/", (req, res) => {
 
 
 
-module.exports = router;
+export default router;
 

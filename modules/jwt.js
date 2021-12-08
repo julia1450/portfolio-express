@@ -1,14 +1,15 @@
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken'
+import jwtConfig from "../config/secretKey.js"
 const {
   secretKey,
   option,
   secretRefreshKey,
   refreshOption,
-} = require("../config/secretKey");
+} = jwtConfig;
 const TOKEN_EXPIRED = -3;
 const TOKEN_INVALID = -2;
 
-module.exports = {
+export default {
   sign: async (id) => {
     const result = {
       // sign메소드를 통해 access token 발급

@@ -1,4 +1,4 @@
-const jwt = require("../modules/jwt");
+import jwt from "../modules/jwt.js";
 const TOKEN_EXPIRED = -3;
 const TOKEN_INVALID = -2;
 
@@ -35,4 +35,4 @@ const authUtil = {
   },
 };
 
-module.exports = authUtil;
+export default authUtil;

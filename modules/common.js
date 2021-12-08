@@ -1,14 +1,14 @@
-const fs = require("fs");
-const path = require("path");
-const jwt = require("./jwt");
+import { createReadStream } from "fs";
+import { resolve } from "path";
+import jwt from "./jwt.js";
 
-var express = require("express");
-var router = express.Router();
+import { Router } from "express";
+var router = Router();
 
 router.get("/", (req, res) => res.send("Hello World"));
 
 const getFile = (fileName) => {
-  return fs.createReadStream(path.resolve("./img", `${fileName}`));
+  return createReadStream(resolve("./img", `${fileName}`));
 };
 /**
  * @swagger
@@ -111,4 +111,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
